@@ -16,13 +16,13 @@ public class UserEvent {
     @EmbeddedId
     private UserEventId id;
 
-    @MapsId("dogadajid")
+    @MapsId("eventId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "dogadajid", nullable = false)
     @ToString.Exclude
     private Event event;
 
-    @MapsId("clanid")
+    @MapsId("userId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "clanid", nullable = false)
     @ToString.Exclude

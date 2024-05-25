@@ -18,6 +18,7 @@ import java.util.Set;
 public class Event {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "pocetak", nullable = false)

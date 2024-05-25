@@ -15,6 +15,7 @@ import java.util.Objects;
 public class Feedback {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "numerickaocjena", nullable = false)

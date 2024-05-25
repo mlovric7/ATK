@@ -1,4 +1,4 @@
 package fer.infsus.atk.DTO;
 
-public class OrganizerDTO {
+public record OrganizerDTO(Integer id, String name, String contact) {
 }

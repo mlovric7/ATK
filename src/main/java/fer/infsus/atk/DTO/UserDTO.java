@@ -1,4 +1,4 @@
 package fer.infsus.atk.DTO;
 
-public class UserDTO {
+public record UserDTO(Integer id, String username) {
 }

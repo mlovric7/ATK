@@ -17,6 +17,7 @@ import java.util.Set;
 public class Organizer {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "naziv", nullable = false, length = 256)
