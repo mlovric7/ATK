@@ -122,10 +122,14 @@ document.addEventListener("DOMContentLoaded", () => {
         saveButton.addEventListener('click', () => {
             const updatedRating = feedbackItem.querySelector('.feedback-rating-input').value;
             const updatedComment = feedbackItem.querySelector('.feedback-comment-input').value;
+            const newUserSelect = feedbackItem.querySelector('.feedback-user-select');
+            const updatedUserId = newUserSelect.value;
+            const updatedUsername = newUserSelect.selectedOptions[0].getAttribute('data-username');
             const updatedFeedback = {
                 id: feedback.id,
                 rating: updatedRating,
-                comment: updatedComment
+                comment: updatedComment,
+                user: { id: updatedUserId, username: updatedUsername }
             };
             fetch(`/api/feedback/${feedback.id}`, {
                 method: 'PUT',
@@ -138,12 +142,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(updatedFeedback => {
                     feedbackItem.querySelector('.feedback-rating').textContent = updatedFeedback.rating;
                     feedbackItem.querySelector('.feedback-comment').textContent = updatedFeedback.comment;
+                    feedbackItem.querySelector('.feedback-user').textContent = updatedFeedback.user.username
                     toggleFeedbackEditMode(feedbackItem);
                 });
         });
 
         deleteButton.addEventListener('click', () => {
-            if (confirm('Are you sure you want to delete this feedback?')) {
+            if (confirm('Jeste li sigurni da zelite obrisati povratnu informaciju?')) {
                 fetch(`/api/feedback/${feedback.id}`, {
                     method: 'DELETE'
                 })
@@ -157,18 +162,23 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleFeedbackEditMode(feedbackItem) {
         const ratingSpan = feedbackItem.querySelector('.feedback-rating');
         const commentSpan = feedbackItem.querySelector('.feedback-comment');
+        const userSpan = feedbackItem.querySelector('.feedback-user');
         const ratingInput = feedbackItem.querySelector('.feedback-rating-input');
         const commentInput = feedbackItem.querySelector('.feedback-comment-input');
+        const userSelect = feedbackItem.querySelector('.feedback-user-select');
         const editButton = feedbackItem.querySelector('.edit-feedback-button');
         const saveButton = feedbackItem.querySelector('.save-feedback-button');
 
         ratingSpan.classList.toggle('d-none');
         commentSpan.classList.toggle('d-none');
+        userSpan.classList.toggle('d-none');
         ratingInput.classList.toggle('d-none');
         commentInput.classList.toggle('d-none');
+        userSelect.classList.toggle('d-none');
         editButton.classList.toggle('d-none');
         saveButton.classList.toggle('d-none');
     }
+
 
     addFeedbackButton.addEventListener('click', () => {
         const newFeedbackItem = document.createElement('tr');

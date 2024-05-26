@@ -2,14 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const eventList = document.getElementById("event-list");
     const addEventButton = document.getElementById("add-event-button");
 
-    // Fetch and display events
     fetch('/api/event')
         .then(response => response.json())
         .then(data => {
             data.forEach(event => addEventToList(event));
         });
 
-    // Handle add event button click
     addEventButton.addEventListener("click", () => {
         window.location.href = "/add-event";
     });

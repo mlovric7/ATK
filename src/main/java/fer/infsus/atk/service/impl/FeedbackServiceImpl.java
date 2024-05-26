@@ -4,6 +4,7 @@ import fer.infsus.atk.DTO.FeedbackDTO;
 import fer.infsus.atk.DTO.UserDTO;
 import fer.infsus.atk.model.Feedback;
 import fer.infsus.atk.repository.FeedbackRepository;
+import fer.infsus.atk.repository.UserRepository;
 import fer.infsus.atk.service.FeedbackService;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,11 @@ import org.springframework.stereotype.Service;
 public class FeedbackServiceImpl implements FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
+    private final UserRepository userRepository;
 
-    public FeedbackServiceImpl(FeedbackRepository feedbackRepository) {
+    public FeedbackServiceImpl(FeedbackRepository feedbackRepository, UserRepository userRepository) {
         this.feedbackRepository = feedbackRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -40,6 +43,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         if (feedback == null) return;
         feedback.setComment(feedbackDTO.comment());
         feedback.setRating(feedbackDTO.rating());
+        feedback.setUser(userRepository.getReferenceById(feedbackDTO.user().id()));
         feedbackRepository.save(feedback);
     }
 }

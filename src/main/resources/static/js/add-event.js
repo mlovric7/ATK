@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const eventForm = document.getElementById("event-form");
     const organizerSelect = document.getElementById("event-organizer");
 
-    // Fetch and display organizers in dropdown
     fetch('/api/organizer')
         .then(response => response.json())
         .then(data => {
@@ -14,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-    // Handle form submission
     eventForm.addEventListener("submit", (event) => {
         event.preventDefault();
         const name = document.getElementById("event-name").value;
