@@ -33,14 +33,20 @@
 </nav>
 <div class="container mt-5">
     <h1 class="mb-4">Kreiraj događaj</h1>
-    <form id="event-form">
+    <form id="event-form" novalidate>
         <div class="mb-3">
             <label for="event-name" class="form-label">Naziv</label>
             <input type="text" class="form-control" id="event-name" required>
+            <div class="invalid-feedback">
+                Unesite naziv događaja.
+            </div>
         </div>
         <div class="mb-3">
             <label for="event-description" class="form-label">Opis</label>
             <textarea class="form-control" id="event-description" required></textarea>
+            <div class="invalid-feedback">
+                Unesite opis događaja.
+            </div>
         </div>
         <div class="mb-3">
             <label for="event-start-display" class="form-label">Datum početka</label>
@@ -49,7 +55,10 @@
                 <button type="button" class="btn btn-outline-secondary" id="start-date-button">
                     <i class="fas fa-calendar-alt"></i>
                 </button>
-                <input type="date" class="form-control position-absolute invisible" id="event-start-picker">
+                <input type="date" class="form-control position-absolute invisible" id="event-start-picker" required>
+            </div>
+            <div class="invalid-feedback">
+                Unesite datum početka događaja.
             </div>
         </div>
         <div class="mb-3">
@@ -59,20 +68,32 @@
                 <button type="button" class="btn btn-outline-secondary" id="end-date-button">
                     <i class="fas fa-calendar-alt"></i>
                 </button>
-                <input type="date" class="form-control position-absolute invisible" id="event-end-picker">
+                <input type="date" class="form-control position-absolute invisible" id="event-end-picker" required>
+            </div>
+            <div class="invalid-feedback">
+                Unesite datum kraja događaja.
             </div>
         </div>
         <div class="mb-3">
             <label for="event-seats" class="form-label">Broj mjesta</label>
-            <input type="number" class="form-control" id="event-seats" required>
+            <input type="number" class="form-control" id="event-seats" min="1" required>
+            <div class="invalid-feedback">
+                Unesite ispravan broj mjesta (pozitivan broj).
+            </div>
         </div>
         <div class="mb-3">
             <label for="event-address" class="form-label">Adresa</label>
             <input type="text" class="form-control" id="event-address" required>
+            <div class="invalid-feedback">
+                Unesite adresu događaja.
+            </div>
         </div>
         <div class="mb-3">
             <label for="event-organizer" class="form-label">Organizator</label>
             <select class="form-control" id="event-organizer" required></select>
+            <div class="invalid-feedback">
+                Odaberite organizatora događaja.
+            </div>
         </div>
         <button type="submit" class="btn btn-success">Kreiraj događaj Event</button>
     </form>

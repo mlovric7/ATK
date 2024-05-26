@@ -42,7 +42,7 @@ public class OrganizerServiceImpl implements OrganizerService {
     @Override
     public void updateOrganizer(Integer id, OrganizerDTO organizerDTO) {
         Organizer organizer = organizerRepository.findById(id).orElse(null);
-        if (organizer == null) return; // TODO error handling
+        if (organizer == null) return;
         organizer.setName(organizerDTO.name());
         organizer.setContact(organizerDTO.contact());
         organizerRepository.save(organizer);

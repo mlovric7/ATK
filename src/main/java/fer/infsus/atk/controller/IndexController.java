@@ -33,5 +33,4 @@ public class IndexController {
     public String addEvent(){
         return "add-event";
     }
-
 }

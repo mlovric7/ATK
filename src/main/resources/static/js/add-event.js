@@ -13,8 +13,30 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-    eventForm.addEventListener("submit", (event) => {
+    eventForm.addEventListener('submit', function(event) {
+
+    }, false);
+
+    eventForm.addEventListener("submit", function(event) {
         event.preventDefault();
+        if (!eventForm.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+            return
+        }
+
+        if (new Date(startDatePicker.value) > new Date(endDatePicker.value)) {
+            event.preventDefault();
+            event.stopPropagation();
+            endDateDisplay.classList.add('is-invalid');
+            endDateDisplay.setCustomValidity('Datum kraja mora biti nakon datuma početka.');
+            return
+        } else {
+            endDateDisplay.classList.remove('is-invalid');
+            endDateDisplay.setCustomValidity('');
+        }
+
+        eventForm.classList.add('was-validated');
         const name = document.getElementById("event-name").value;
         const description = document.getElementById("event-description").value;
         const start = document.getElementById("event-start-display").value;
@@ -56,6 +78,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const endDateButton = document.getElementById('end-date-button');
 
     startDateButton.addEventListener('click', function() {
+        startDatePicker.click();
+    });
+
+    startDatePicker.addEventListener('change', function() {
+        startDateDisplay.value = startDatePicker.value;
+        startDateDisplay.classList.remove('is-invalid');
+    });
+
+    endDateButton.addEventListener('click', function() {
+        endDatePicker.click();
+    });
+
+    endDatePicker.addEventListener('change', function() {
+        endDateDisplay.value = endDatePicker.value;
+        endDateDisplay.classList.remove('is-invalid');
+    });
+
+    startDateButton.addEventListener('click', function() {
         startDatePicker.showPicker();
     });
 
@@ -83,3 +123,4 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${day}. ${month}. ${year}.`;
     }
 });
+

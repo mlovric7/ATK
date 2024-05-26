@@ -42,7 +42,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventDetailDTO getEvent(Integer id) {
         Event event = eventRepository.findById(id).orElse(null);
-        if (event == null) return null; // TODO error handling
+        if (event == null) return null;
         List<FeedbackDTO> feedbackDTOs = feedbackRepository.findByEvent_Id(id).stream().map(feedback -> new FeedbackDTO(feedback.getId(), feedback.getRating(), feedback.getComment(),
                 new UserDTO(feedback.getUser().getId(), feedback.getUser().getUsername()))).toList();
         return new EventDetailDTO(EventDTO.from(event), feedbackDTOs);
@@ -65,7 +65,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public void updateEvent(Integer id, EventDTO eventDTO) {
         Event event = eventRepository.findById(id).orElse(null);
-        if (event == null) return; // TODO error handling
+        if (event == null) return;
         event.setName(eventDTO.name());
         event.setAddress(eventDTO.address());
         event.setNumberOfSeats(eventDTO.numberOfSeats());
@@ -79,7 +79,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventDTO deleteEvent(Integer id) {
         Event event = eventRepository.findById(id).orElse(null);
-        if (event == null) return null; // TODO error handling
+        if (event == null) return null;
         EventDTO eventDTO = EventDTO.from(event);
         eventRepository.delete(event);
         return eventDTO;

@@ -22,7 +22,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public FeedbackDTO getFeedback(Integer id) {
         Feedback feedback = feedbackRepository.findById(id).orElse(null);
-        if (feedback == null) return null; // TODO error handling
+        if (feedback == null) return null;
         return new FeedbackDTO(feedback.getId(), feedback.getRating(), feedback.getComment(),
                 new UserDTO(feedback.getUser().getId(), feedback.getUser().getUsername()));
     }
