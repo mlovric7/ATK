@@ -28,9 +28,10 @@ public class FeedbackServiceImpl implements FeedbackService {
     public FeedbackDTO deleteFeedback(Integer id) {
         Feedback feedback = feedbackRepository.findById(id).orElse(null);
         if (feedback == null) return null;
-        feedbackRepository.deleteById(id);
-        return new FeedbackDTO(feedback.getId(), feedback.getRating(), feedback.getComment(),
+        FeedbackDTO feedbackDTO = new FeedbackDTO(feedback.getId(), feedback.getRating(), feedback.getComment(),
                 new UserDTO(feedback.getUser().getId(), feedback.getUser().getUsername()));
+        feedbackRepository.deleteById(id);
+        return feedbackDTO;
     }
 
     @Override

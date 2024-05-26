@@ -1,4 +1,6 @@
 package fer.infsus.atk.DTO;
 
-public class EventDetailDTO {
+import java.util.List;
+
+public record EventDetailDTO(EventDTO event, List<FeedbackDTO> feedbacks) {
 }

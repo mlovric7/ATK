@@ -4,19 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const addOrganizerForm = document.getElementById("add-organizer-form");
     const organizerForm = document.getElementById("organizer-form");
 
-    // Fetch and display organizers
     fetch('/api/organizer')
         .then(response => response.json())
         .then(data => {
             data.forEach(organizer => addOrganizerToList(organizer));
         });
 
-    // Show form on button click
     addOrganizerButton.addEventListener("click", () => {
         addOrganizerForm.classList.toggle("d-none");
     });
 
-    // Handle form submission
     organizerForm.addEventListener("submit", (event) => {
         event.preventDefault();
         const name = document.getElementById("organizer-name").value;

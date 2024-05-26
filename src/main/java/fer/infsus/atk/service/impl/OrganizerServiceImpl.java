@@ -52,7 +52,8 @@ public class OrganizerServiceImpl implements OrganizerService {
     public OrganizerDTO deleteOrganizer(Integer id) {
         Organizer organizer = organizerRepository.findById(id).orElse(null);
         if (organizer == null) return null;
+        OrganizerDTO organizerDTO = new OrganizerDTO(organizer.getId(), organizer.getName(), organizer.getContact());
         organizerRepository.delete(organizer);
-        return new OrganizerDTO(organizer.getId(), organizer.getName(), organizer.getContact());
+        return organizerDTO;
     }
 }

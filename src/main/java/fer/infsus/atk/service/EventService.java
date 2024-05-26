@@ -17,5 +17,5 @@ public interface EventService {
 
     EventDTO deleteEvent(Integer id);
 
-    FeedbackDTO addFeedback(Integer id, FeedbackDTO feedback);
+    Integer addFeedback(Integer id, FeedbackDTO feedback);
 }

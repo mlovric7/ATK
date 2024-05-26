@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api/event")
 public class EventController {
 
@@ -32,7 +32,7 @@ public class EventController {
     @PostMapping
     public EventDTO createEvent(@RequestBody EventDTO event) {
         Integer id = eventService.createEvent(event);
-        return new EventDTO(); // TODO add all the fields
+        return EventDTO.addId(id, event);
     }
 
     @PutMapping("/{id}")
@@ -48,6 +48,7 @@ public class EventController {
 
     @PostMapping("/{id}")
     public FeedbackDTO addFeedback(@PathVariable Integer id, @RequestBody FeedbackDTO feedback) {
-        return eventService.addFeedback(id, feedback);
+        Integer feedbackId = eventService.addFeedback(id, feedback);
+        return new FeedbackDTO(feedbackId, feedback.rating(), feedback.comment(), feedback.user());
     }
 }
